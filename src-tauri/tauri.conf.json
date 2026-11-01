@@ -10,6 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
+ 
     "windows": [
       {
         "title": "Don Quixote assist",
@@ -23,7 +24,13 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+       "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "C:/Users/Davi/Desktop/projs/donquixote/src/music/**"
+        ]
+      }
     }
   },
   "bundle": {
