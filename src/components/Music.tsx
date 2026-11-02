@@ -90,7 +90,7 @@ const mechernosom = async() => {
         <h1>{at || "Musgas da don"}</h1>
         <div className="don">{
         at === "Hero.mp3" ?
-        <video controls={false} autoPlay={true} muted={true}>
+        <video controls={false} autoPlay={true} muted={true} onClick={abirSeletor}>
             <source src={video}/>
         </video>
         :
