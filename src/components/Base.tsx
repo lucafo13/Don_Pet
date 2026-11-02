@@ -11,7 +11,7 @@ export const Base = () => {
   <TitleBar/>
     <main className="container">
       <h1>Don quixote</h1>
-      <Pet musga={musga} setMusga={setMusga}/>
+      <Pet/>
     </main>
     </>
     ) 

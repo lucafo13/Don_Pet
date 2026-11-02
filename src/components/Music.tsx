@@ -5,8 +5,12 @@ import { listen } from '@tauri-apps/api/event';
 import img from '../assets/don-quixote.gif'
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { TitleBar } from "./TItlebar"
+import gif from '../assets/don-quixote.gif'
+import stoped from '../assets/donstoped.jpg'
+import video from '../music/Video Project 1.mp4'
 import { useEffect, useState, useRef } from 'react';
 export const Music = ({atual}:any) => {
+    let dance = "https://media1.tenor.com/m/B-EMm24pVcAAAAAd/don-quixote-dance.gif"
     const tocadento = async(caminho: string, nome: string) => {
          if (!audioRef.current) return;
     
@@ -59,6 +63,7 @@ const mechernosom = async() => {
     }
     if(tocando){
         audioRef.current.pause()
+        console.log(at)
     }
     else{
         try {
@@ -69,7 +74,6 @@ const mechernosom = async() => {
         }
     }
 }
-
     return(
     <>
     
@@ -84,9 +88,14 @@ const mechernosom = async() => {
     <main className='container'>
 
         <h1>{at || "Musgas da don"}</h1>
-        <div className="don">
-
-        <img src={img} alt="" onClick={abirSeletor} />
+        <div className="don">{
+        at === "Hero.mp3" ?
+        <video controls={false} autoPlay={true} muted={true}>
+            <source src={video}/>
+        </video>
+        :
+        <img src={tocando? dance : stoped} alt="" onClick={abirSeletor} />
+           }
         </div>
         <br />
 

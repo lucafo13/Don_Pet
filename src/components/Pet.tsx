@@ -1,16 +1,28 @@
 import donq from "../assets/test.jpg"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import gif from '../assets/don-quixote.gif'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import car from '../assets/imagem.jpg'
-type musica = {
-  musga: boolean,
-  setMusga: React.Dispatch<React.SetStateAction<boolean>>
-}
-export const Pet = ({musga, setMusga}: musica) => {
-      const [ent, setEnt] = useState(false)
+
+export const Pet = () => {
+  const [ent, setEnt] = useState(false)
+  let [temp, seTemp] = useState(0)
+  useEffect(() => {
+    let crono: ReturnType<typeof setInterval>;
+    if(ent){
+      crono = setInterval(() => {
+        seTemp((temp) => temp + 1)
+      }, 1000);
+    }
+    else {
+      crono = setInterval(() => {
+        seTemp((temp) => temp - 1)
+      }, 1500);
+    }
+    return () => clearInterval(crono)
+  }, [ent])
   let [danc, setD] = useState(false)
 
   const [carinhox, setCarinho] = useState(false);
@@ -21,7 +33,12 @@ export const Pet = ({musga, setMusga}: musica) => {
       ? gif
       : carinhox
         ? car
-        : donq
+        : temp >10 ? 
+        "https://i.redd.it/2t24jza4kabd1.png"
+        : temp < -10 ? 
+        "https://media.tenor.com/UKrP09A1e10AAAAe/don-quixote-angry.png"
+        :
+        donq
         ;
 
   const carinho = () => {
@@ -63,19 +80,18 @@ const abrirMusica = () => {
     console.error("Erro ao abrir música:", error);
   });
 };
-
     return (
         <>
         
             <div className="don">
         <img id="img" onMouseEnter={() => {setEnt(true)}} onMouseLeave={() => {setEnt(false)}}  src={imagemAtual} alt="DOnquixote" />
       </div>
-      <br />
-        <h2>{ent ? "Fazendo carinhoo.. " : "Nada ainda"}</h2>
+        <h2>{ent ? "Fazendo carinhoo.. " : temp > 10 ? "Feliz" : temp < -10 ? "Ódio" :  "Nada ainda"}</h2>
+        <p>Pontos carinho:{temp}</p>
       <div className="action">
-        
+      
         <button onClick={mitose}>Mitose</button>
-        <button onClick={abrirMusica}>Carinho</button>          
+        <button onClick={abrirMusica}>Musgas</button>          
         <button onClick={() => setD((atual) => !atual)}>
             {danc ? "Parar dança" : "morte"}
           </button>
